@@ -1,14 +1,14 @@
 # Nerfies
 
-This is the repository that contains source code for the [AutoVLA website](https://autovla.github.io/).
+This is the repository that contains source code for the [SpanVLA website](https://spanvla.github.io/).
 
-If you find AutoVLA useful for your work please cite:
+If you find SpanVLA useful for your work please cite:
 ```
-@article{zhou2025autovla,
-  author    = {Zhou, Zewei and Cai, Tianhui and Zhao, Seth Z.and Zhang, Yun and Huang, Zhiyu and Zhou, Bolei and Ma, Jiaqi},
-  title     = {AutoVLA: Vision-Language-Action Model for End-to-End Autonomous Driving with Adaptive Reasoning and Reinforcement Fine-Tuning},
+@article{zhou2026spanvla,
+  author    = {Zhou, Zewei and Yang, Ruining and Qi, Xuewei and Guo, Yiluan and Chen, Sherry X. and Feng, Tao and Pistunova, Kateryna and Shen, Yishan and Su, Lili and Ma, Jiaqi},
+  title     = {SpanVLA: Efficient Action Bridging and Learning from Negative-Recovery Samples for Vision-Language-Action Model},
   journal   = {arXiv preprint},
-  year      = {2025},
+  year      = {2026},
 }
 ```
 
