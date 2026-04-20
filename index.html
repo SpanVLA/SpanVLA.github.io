@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Efficient Action Bridging and Learning from Negative-Recovery Samples for Vision-Language-Action Model.">
+  <meta name="keywords" content="VLA, End-to-end Autonomous Driving">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpanVLA</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/SpanVLA_icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-widescreen">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <div class="logo-title-container">
+            <img src="./static/images/SpanVLA_logo.png" alt="SpanVLA Logo" class="publication-logo">
+            <h1 class="title is-3 publication-title">SpanVLA: Efficient Action Bridging and Learning from Negative-Recovery Samples for Vision-Language-Action Model</h1>
+          </div>
+          <!-- <div class="is-size-5" style="margin-top: -0.5rem; margin-bottom: 0rem;">
+            - NeurIPS 2025 -
+          </div> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zewei-zhou.github.io/">Zewei Zhou</a><sup>1,2*</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=qDBpexUAAAAJ&hl=en">Ruining Yang</a><sup>2,3*</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=pOA6uKMAAAAJ&hl=en">Xuewei (Tony) Qi</a><sup>2†</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=iQx57VIAAAAJ&hl=en">Yiluan Guo</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sherryxtchen.github.io/">Sherry X. Chen</a><sup>2</sup>,
+            </span>
+            <br/>
+            <span class="author-block">
+              <a href="">Tao Feng</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=V7QY5j0AAAAJ&view_op=list_works&sortby=pubdate">Kateryna Pistunova</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=Is58Ix8AAAAJ&hl=en/">Yishan Shen</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://lilisu3.sites.northeastern.edu/">Lili Su</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://mobility-lab.seas.ucla.edu/about/">Jiaqi Ma</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup> University of California, Los Angeles, USA</span><br/>
+            <span class="author-block"><sup>2</sup> Motional, USA</span><br/>
+            <span class="author-block"><sup>3</sup> Northeastern University, USA</span>
+          </div>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal contribution. <sup>†</sup>Corresponding author.</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-layer-group"></i>
+                  </span>
+                  <span>Data (Coming Soon)</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser-image" src="./static/images/SpanVLA_Framework.jpg" alt="SpanVLA Framework Diagram" style="width: 100%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem;">
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">SpanVLA</span> introduce a efficient action bridging method with sparse KV-Cache and history initialization and learn from negative-recovery samples to improve the robustness and performance.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Vision-Language-Action (VLA) models offer a promising autonomous driving paradigm for leveraging world knowledge and reasoning capabilities, especially in long-tail scenarios. However, existing VLA models often struggle with the high latency in action generation using autoregressive generation framework and exhibit limited robustness.
+          </p>
+          <p>
+            In this paper, we propose <span class="dnerf">SpanVLA</span>, a novel end-to-end autonomous driving framework, integrating an autoregressive reasoning and a flow-matching action expert. First, <span class="dnerf">SpanVLA</span> introduces an efficient bridge to leverage the vision and reasoning guidance of VLM to efficiently plan future trajectories using a flow-matching policy conditioned on historical trajectory initialization, which significantly reduces inference time. Second, to further improve the performance and robustness of the <span class="dnerf">SpanVLA</span> model, we propose a GRPO-based post-training method to enable the VLA model not only to learn from positive driving samples but also to learn how to avoid the typical negative behaviors and learn recovery behaviors. We further introduce <em>mReasoning</em>, a new real-world driving reasoning dataset, focusing on complex reasoning-demanding scenarios and negative-recovery samples.
+          </p>
+          <p>
+            Extensive experiments on the NAVSIM (v1 and v2) demonstrate the competitive performance of the <span class="dnerf">SpanVLA</span> model. Additionally, the qualitative results across diverse scenarios highlight the planning performance and robustness of our model.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Model Structure and Training Strategy</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container is-max-desktop">
+      <img src="./static/images/SpanVLA_Bridging.jpg" alt="SpanVLA Efficient Action Bridging" style="width: 100%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem; margin-top: 3rem;">
+    </div>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-justified">
+            <p style="margin-top: 1.5rem;">
+              🔗 Two Main Components:
+            </p>
+            <ul style="list-style-type: disc; margin-left: 40px;margin-top: -0.5rem;">
+              <li><strong> VLM Backbone</strong> processes visual and textual input and generates reasoning (with action during training), employing a unified autoregressive Transformer decoder.</li>
+              <li><strong> Efficient Action Bridging</strong> is a flow-matching policy conditioned on historical trajectory initialization based on sparse VLM KV-Cache, which significantly reduces inference time.</li>
+            </ul>
+            
+            <p style="margin-top: 1.5rem;">
+              🔍 Training Strategy:
+            </p>
+            <ul style="list-style-type: disc; margin-left: 40px;margin-top: -0.5rem;">
+              <li><strong> Supervised Fine-Tuning (SFT)</strong> first trains the VLM to learn reasoning with action supervision. Furthermore, the action bridging is trained with the frozen VLM to learn the efficient action generation.</li>
+              <li><strong> Reinforcement Fine-Tuning (RFT)</strong> enables the model not only to learn from positive driving demonstrations, but also to learn how to avoid the typical negative behavior and learn recovery behaviors.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src=""
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3"><em>mReasoning</em> Dataset</h2>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top: 2.5rem;">
+    <em>mReasoning</em> includes 30k complex interaction scenarios, and 3k + 3k negative-recovery samples. The dataset is collected from real-world driving scenarios across Las Vegas, Boston, Pittsburgh, and Singapore.
+  </p>
+  <div class="container is-max-desktop">
+    <img src="./static/images/data_distribution.jpg" alt="Dataset Distribution" style="width: 100%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 0.6rem; margin-top: 2.0rem;">
+  </div>
+  <p>
+    Some complex scenario samples (positive samples) in the mReasoning dataset are shown below
+  </p>
+  <div class="container is-max-desktop">
+    <img src="./static/images/interaction_scenarios.jpg" alt="<em>mReasoning</em> Dataset Samples" style="width: 100%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem; margin-top: 2.0rem;">
+  </div>
+  <p>
+    <strong>(a) Cut-in scenario:</strong> A vehicle from the front-right abruptly cuts in at the intersection. Frame -3 and Frame 0 means the first history frame and the current frame for the camera streams.
+  </p>
+  <p style="margin-top: 0.5rem;">
+    <strong>(b) Intersection scenario:</strong> The ego vehicle has already entered the intersection; despite the red traffic signal, it should yield appropriately and follow the leading vehicle to complete the left turn.
+  </p>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width has-text-centered">
+        <h2 class="title is-3">Experiments</h2>
+
+        <h3 class="title is-4" style="text-align: left;">Efficient Action Bridging</h3>
+        <div class="content has-text-justified">
+          <div class="container is-max-desktop has-text-centered">
+            <img src="./static/images/Efficiency_table.png" alt="Efficient Action Bridging" style="width: 85%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem;">
+          </div>
+          <p>
+            <ul style="list-style-type: disc; margin-left: 40px;margin-top: -1.5rem;">
+              <li>4x faster inference time compared to the autoregressive decoding. </li>
+              <li> As waypoint count increases in high-frequency trajectories, runtime grows only slightly. </li>
+            </ul>
+          </p>
+        </div>
+
+        <h3 class="title is-4" style="text-align: left; margin-bottom: 2rem; margin-top: 3rem;">RFT Performance</h3>
+        <div class="content has-text-justified">
+          <div class="container is-max-desktop">
+            <img src="./static/images/Positive_Results.jpg" alt="RFT Visualization" style="width: 98%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem;">
+          </div>
+          <p>
+            <ul style="list-style-type: disc; margin-left: 40px;margin-top: -1.5rem;">
+              <li>10% improvement in PDMS on the NAVSIM v1 benchmark with positive, negative, and recovery samples.</li>
+            </ul>
+          </p>
+        </div>
+
+        <h3 class="title is-4" style="text-align: left; margin-bottom: 2rem; margin-top:4rem;">Negative-Sample Results</h3>
+        <div class="content has-text-justified">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered is-multiline">
+              <div class="column is-full has-text-centered" style="padding: 0.5rem;">
+                <img src="./static/images/negative_demo.gif" alt="Negative sample demo" style="width: 100%; height: auto;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="title is-4" style="text-align: left; margin-bottom: 2rem; margin-top:4rem;">Recovery-Sample Results</h3>
+        <div class="content has-text-justified">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered is-multiline">
+              <div class="column is-full has-text-centered" style="padding: 0.5rem;">
+                <img src="./static/images/recovery_demo.gif" alt="Recovery sample demo" style="width: 100%; height: auto;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{zhou2025autovla,
+  author    = {Zhou, Zewei and Cai, Tianhui and Zhao, Seth Z.and Zhang, Yun and Huang, Zhiyu and Zhou, Bolei and Ma, Jiaqi},
+  title     = {AutoVLA: A Vision-Language-Action Model for End-to-End Autonomous Driving with Adaptive Reasoning and Reinforcement Fine-Tuning},
+  journal   = {arXiv preprint arXiv:2506.13757},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+
+
+<div class="content has-text-centered">
+  <p>
+    The website design was adapted from <a href="https://nerfies.github.io/">nerfies</a>.
+  </p>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var videos = document.querySelectorAll('.nuscene-video');
+    videos.forEach(function(video) {
+      video.playbackRate = 1.2;
+    });
+  });
+</script>
+
+</body>
+</html>
