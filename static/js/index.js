@@ -1,78 +1,46 @@
-window.HELP_IMPROVE_VIDEOJS = false;
-
-var INTERP_BASE = "./static/interpolation/stacked";
-var NUM_INTERP_FRAMES = 240;
-
-var interp_images = [];
-function preloadInterpolationImages() {
-  for (var i = 0; i < NUM_INTERP_FRAMES; i++) {
-    var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
-    interp_images[i] = new Image();
-    interp_images[i].src = path;
-  }
+'use strict';
+const copyButton = document.getElementById('copy-citation');
+if (copyButton) {
+  copyButton.addEventListener('click', async () => {
+    const text = document.getElementById('citation').textContent;
+    const status = document.getElementById('copy-status');
+    try {
+      await navigator.clipboard.writeText(text);
+      status.textContent = 'BibTeX copied to clipboard.';
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(document.getElementById('citation'));
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      status.textContent = 'Citation selected. Press Ctrl+C or ⌘C to copy.';
+    }
+  });
 }
 
-function setInterpolationImage(i) {
-  var image = interp_images[i];
-  image.ondragstart = function() { return false; };
-  image.oncontextmenu = function() { return false; };
-  $('#interpolation-image-wrapper').empty().append(image);
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let motionPaused = reducedMotion.matches;
+function updateMotion() {
+  document.body.classList.toggle('motion-paused', motionPaused);
+  document.body.classList.toggle('motion-enabled', !motionPaused);
+  document.querySelectorAll('img[data-animated]').forEach(image => {
+    const source = motionPaused ? image.dataset.still : image.dataset.animated;
+    if (image.getAttribute('src') !== source) image.src = source;
+  });
 }
-
-
-$(document).ready(function() {
-    // Check for click events on the navbar burger icon
-    $(".navbar-burger").click(function() {
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      $(".navbar-burger").toggleClass("is-active");
-      $(".navbar-menu").toggleClass("is-active");
-
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
     });
-
-    var options = {
-			slidesToScroll: 1,
-			slidesToShow: 3,
-			loop: true,
-			infinite: true,
-			autoplay: false,
-			autoplaySpeed: 3000,
-    }
-
-		// Initialize all div with carousel class
-    var carousels = bulmaCarousel.attach('.carousel', options);
-
-    // Loop on each carousel initialized
-    for(var i = 0; i < carousels.length; i++) {
-    	// Add listener to  event
-    	carousels[i].on('before:show', state => {
-    		console.log(state);
-    	});
-    }
-
-    // Access to bulmaCarousel instance of an element
-    var element = document.querySelector('#my-element');
-    if (element && element.bulmaCarousel) {
-    	// bulmaCarousel instance is available as element.bulmaCarousel
-    	element.bulmaCarousel.on('before-show', function(state) {
-    		console.log(state);
-    	});
-    }
-
-    /*var player = document.getElementById('interpolation-video');
-    player.addEventListener('loadedmetadata', function() {
-      $('#interpolation-slider').on('input', function(event) {
-        console.log(this.value, player.duration);
-        player.currentTime = player.duration / 100 * this.value;
-      })
-    }, false);*/
-    preloadInterpolationImages();
-
-    $('#interpolation-slider').on('input', function(event) {
-      setInterpolationImage(this.value);
-    });
-    setInterpolationImage(0);
-    $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
-
-    bulmaSlider.attach();
-
-})
+  }, { threshold: 0.06 });
+  document.querySelectorAll('main figure:not([data-static]), main .cards, main .section h2, main .table-scroll, .highlights').forEach(element => {
+    element.classList.add('reveal');
+    observer.observe(element);
+  });
+}
+updateMotion();
+reducedMotion.addEventListener('change', event => { motionPaused = event.matches; updateMotion(); });

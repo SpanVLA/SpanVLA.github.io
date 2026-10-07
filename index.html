@@ -1,67 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="Efficient Action Bridging and Learning from Negative-Recovery Samples for Vision-Language-Action Model.">
-  <meta name="keywords" content="VLA, End-to-end Autonomous Driving">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpanVLA</title>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
+  <meta name="description" content="SpanVLA learns what to avoid and how to recover with nuReasoning-NR and Negative–Recovery Reinforcement Fine-Tuning, while generating actions efficiently through a lightweight action bridge.">
+  <meta name="keywords" content="SpanVLA, nuReasoning-NR, NR-RFT, vision-language-action, autonomous driving">
+  <meta property="og:title" content="SpanVLA: Learning What to Avoid and How to Recover">
+  <meta property="og:description" content="Real-world negative and recovery supervision for robust driving, with fast action bridging.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://spanvla.github.io/">
+  <meta property="og:image" content="https://spanvla.github.io/static/images/spanvla-teaser.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>SpanVLA | Learning What to Avoid and How to Recover</title>
   <link rel="icon" href="./static/images/SpanVLA_icon.png">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <link rel="stylesheet" href="./static/css/index.css?v=7">
+  <script src="./static/js/index.js?v=7" defer></script>
 </head>
 <body>
-
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-widescreen">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <div class="logo-title-container">
-            <img src="./static/images/SpanVLA_logo.png" alt="SpanVLA Logo" class="publication-logo">
-            <h1 class="title is-3 publication-title">SpanVLA: Efficient Action Bridging and Learning from Negative-Recovery Samples for Vision-Language-Action Model</h1>
-          </div>
-          <!-- <div class="is-size-5" style="margin-top: -0.5rem; margin-bottom: 0rem;">
-            - NeurIPS 2025 -
-          </div> -->
+<a class="skip-link" href="#overview">Skip to content</a>
+<nav class="page-nav" aria-label="Page sections"><a class="nav-brand" href="#top"><img src="./static/images/SpanVLA_logo.png" alt="" width="28" height="28"><span>SpanVLA</span></a><div><a href="#dataset">Dataset</a><a href="#nr-rft">NR-RFT</a><a href="#bridge">Action Bridge</a><a href="#results">Results</a><a href="#BibTeX">Citation</a></div></nav>
+<header id="top" class="publication-header container">
+  <div class="brand"><img src="./static/images/SpanVLA_logo.png" alt="SpanVLA" width="62" height="62"><span>SpanVLA</span></div>
+  <h1><span class="title-line">Learning from Negative-Recovery Samples with Fast Action Bridging</span> <span class="title-line">for Vision-Language-Action Model</span></h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://zewei-zhou.github.io/">Zewei Zhou</a><sup>1,2*</sup>,</span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=qDBpexUAAAAJ&hl=en">Ruining Yang</a><sup>2,3*</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?hl=en&user=pOA6uKMAAAAJ&view_op=list_works&sortby=pubdate">Xuewei (Tony) Qi</a><sup>2†</sup>,
+              <a href="https://scholar.google.com/citations?hl=en&user=pOA6uKMAAAAJ&view_op=list_works&sortby=pubdate">Tony (Xuewei) Qi</a><sup>2†</sup>,
             </span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=iQx57VIAAAAJ&hl=en">Yiluan Guo</a><sup>2</sup>,
@@ -71,13 +38,13 @@
             </span>
             <br/>
             <span class="author-block">
-              <a href="">Tao Feng</a><sup>2</sup>,
+              <a href="https://openreview.net/profile?id=~Tao_Feng17">Tao Feng</a><sup>2</sup>,
             </span>
             <span class="author-block">
               <a href="https://scholar.google.com/citations?hl=en&user=V7QY5j0AAAAJ&view_op=list_works&sortby=pubdate">Kateryna Pistunova</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=Is58Ix8AAAAJ&hl=en/">Yishan Shen</a><sup>2</sup>,
+              <a href="https://scholar.google.com/citations?user=Is58Ix8AAAAJ&hl=en">Yishan Shen</a><sup>2</sup>,
             </span>
             <span class="author-block">
               <a href="https://lilisu3.sites.northeastern.edu/">Lili Su</a><sup>3</sup>,
@@ -96,275 +63,60 @@
             <span class="author-block"><sup>*</sup>Equal contribution. <sup>†</sup>Corresponding author.</span>
           </div>
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/pdf/2604.19710"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2604.19710"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Video Link. -->
-              <!-- <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span> -->
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/motional/SpanVLA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-layer-group"></i>
-                  </span>
-                  <span>Data (Coming Soon)</span>
-                  </a>
-            </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="publication-links"><a class="button" href="https://arxiv.org/pdf/2604.19710">Paper</a><a class="button" href="https://arxiv.org/abs/2604.19710">arXiv</a><a class="button" href="https://github.com/motional/SpanVLA">GitHub</a><span class="button unavailable">Data &amp; Benchmark · Coming soon</span></div>
+</header>
+<main>
+<section class="teaser container" aria-label="SpanVLA teaser">
+<figure><a class="figure-link" href="./static/images/spanvla-teaser.png" target="_blank" rel="noopener" aria-label="Open full-size figure: Negative and recovery driving examples before and after NR-RFT, with nuReasoning-NR benchmark results and dataset statistics"><img src="./static/images/spanvla-teaser-animated.svg" data-animated="./static/images/spanvla-teaser-animated.svg" data-still="./static/images/spanvla-teaser.png" alt="Negative and recovery driving examples before and after NR-RFT, with nuReasoning-NR benchmark results and dataset statistics" fetchpriority="high" decoding="async" width="583" height="303"></a><figcaption><strong>Real-world experience teaches both avoidance and correction.</strong> With NR supervision, SpanVLA predicts an earlier merge before a construction-zone lane closure and a return to the original lane after passing an obstructing truck.</figcaption></figure>
+
 </section>
-
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <img id="teaser-image" src="./static/images/SpanVLA_Framework.jpg" alt="SpanVLA Framework Diagram" style="width: 100%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem;">
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">SpanVLA</span> introduce a efficient action bridging method with sparse KV-Cache and history initialization and learn from negative-recovery samples to improve the robustness and performance.
-      </h2>
-    </div>
-  </div>
+<section id="overview" class="section container">
+  <p class="eyebrow">Overview</p><h2>Beyond positive demonstrations</h2>
+  <p class="section-intro">Expert demonstrations teach a driving VLA what to do. Negative and recovery experiences add two complementary lessons: which behaviors to avoid, and how to correct behavior from difficult driving states.</p>
+  <div class="cards"><article><span class="card-number">01 / Data</span><h3>nuReasoning-NR</h3><p>A real-world driving dataset and benchmark combining positive reasoning, suboptimal trajectories, and expert recovery trajectories.</p></article><article><span class="card-number">02 / Learning</span><h3>NR-RFT</h3><p>Asymmetric rewards penalize undesirable behaviors and reinforce expert corrections. Advantage correction maintains useful learning signals in difficult rollout groups.</p></article><article><span class="card-number">03 / Efficiency</span><h3>Efficient Action Bridge</h3><p>Autoregressive reasoning guides a lightweight flow-matching expert through sparse-layer KV caches and historical trajectory initialization.</p></article></div>
+  <details class="abstract"><summary>Read the abstract</summary><p>Vision-Language-Action (VLA) models bring rich world knowledge and reasoning capabilities to autonomous driving. However, most driving VLAs are trained only on positive expert demonstrations, which teach models what to do but provide limited supervision on which behaviors to avoid and how to recover from these failures, leading to limited robustness. We introduce SpanVLA, a robust and efficient driving VLA, together with nuReasoning-NR, the first real-world driving dataset and benchmark for learning from negative and recovery samples. An extension of nuReasoning, it comprises 36K reasoning-intensive driving scenarios, including 3K suboptimal trajectories and 3K expert recovery trajectories. To exploit their asymmetric supervision, we introduce Negative–Recovery Reinforcement Fine-Tuning (NR-RFT), which penalizes undesirable behaviors and rewards expert corrective actions. Because challenging scenarios produce rollout groups dominated by similar suboptimal or even infeasible trajectories, it further incorporates an advantage correction to preserve informative optimization signals and encourage exploration. For efficient action generation, SpanVLA retains autoregressive reasoning and introduces a lightweight flow-matching action bridge conditioned on sparse-layer KV caches and initialized from the historical trajectory. Extensive experiments on NAVSIM v1/v2, nuReasoning, and the nuReasoning-NR benchmark demonstrate strong and robust planning performance and efficient action generation. Qualitative results across diverse challenging scenarios further highlight its planning robustness and recovery capability. The dataset and benchmark code will be released to support future research.</p></details>
 </section>
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Vision-Language-Action (VLA) models offer a promising autonomous driving paradigm for leveraging world knowledge and reasoning capabilities, especially in long-tail scenarios. However, existing VLA models often struggle with the high latency in action generation using autoregressive generation framework and exhibit limited robustness.
-          </p>
-          <p>
-            In this paper, we propose <span class="dnerf">SpanVLA</span>, a novel end-to-end autonomous driving framework, integrating an autoregressive reasoning and a flow-matching action expert. First, <span class="dnerf">SpanVLA</span> introduces an efficient bridge to leverage the vision and reasoning guidance of VLM to efficiently plan future trajectories using a flow-matching policy conditioned on historical trajectory initialization, which significantly reduces inference time. Second, to further improve the performance and robustness of the <span class="dnerf">SpanVLA</span> model, we propose a GRPO-based post-training method to enable the VLA model not only to learn from positive driving samples but also to learn how to avoid the typical negative behaviors and learn recovery behaviors. We further introduce <em>mReasoning</em>, a new real-world driving reasoning dataset, focusing on complex reasoning-demanding scenarios and negative-recovery samples.
-          </p>
-          <p>
-            Extensive experiments on the NAVSIM (v1 and v2) demonstrate the competitive performance of the <span class="dnerf">SpanVLA</span> model. Additionally, the qualitative results across diverse scenarios highlight the planning performance and robustness of our model.
-          </p>
-        </div>
-      </div>
-    </div>
-    
-
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Model Structure and Training Strategy</h2>
-        </div>
-      </div>
-    </div>
-    <div class="container is-max-desktop">
-      <img src="./static/images/SpanVLA_Bridging.jpg" alt="SpanVLA Efficient Action Bridging" style="width: 100%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem; margin-top: 3rem;">
-    </div>
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <div class="content has-text-justified">
-            <p style="margin-top: 1.5rem;">
-              🔗 Two Main Components:
-            </p>
-            <ul style="list-style-type: disc; margin-left: 40px;margin-top: -0.5rem;">
-              <li><strong> VLM Backbone</strong> processes visual and textual input and generates reasoning (with action during training), employing a unified autoregressive Transformer decoder.</li>
-              <li><strong> Efficient Action Bridging</strong> is a flow-matching policy conditioned on historical trajectory initialization based on sparse VLM KV-Cache, which significantly reduces inference time.</li>
-            </ul>
-            
-            <p style="margin-top: 1.5rem;">
-              🔍 Training Strategy:
-            </p>
-            <ul style="list-style-type: disc; margin-left: 40px;margin-top: -0.5rem;">
-              <li><strong> Supervised Fine-Tuning (SFT)</strong> first trains the VLM to learn reasoning with action supervision. Furthermore, the action bridging is trained with the frozen VLM to learn the efficient action generation.</li>
-              <li><strong> Reinforcement Fine-Tuning (RFT)</strong> enables the model not only to learn from positive driving demonstrations, but also to learn how to avoid the typical negative behavior and learn recovery behaviors.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    <!-- Paper video. -->
-    <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src=""
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div> -->
-    <!--/ Paper video. -->
-  </div>
+<section id="dataset" class="section tinted"><div class="container">
+  <p class="eyebrow">Real-world data &amp; evaluation</p><h2>nuReasoning-NR Dataset and Benchmark</h2>
+  <p class="section-intro">An extension of nuReasoning with 36K interaction-intensive driving samples.</p>
+  <div class="cards sample-cards"><article><strong>30K</strong><h3>Positive reasoning samples</h3><p>Expert trajectories and reasoning annotations teach decision-making and planning.</p></article><article><strong>3K</strong><h3>Negative samples</h3><p>Suboptimal trajectories show<br>which behaviors to avoid.</p></article><article><strong>3K</strong><h3>Expert recovery samples</h3><p>Subsequent expert corrections teach how to recover from challenging driving states.</p></article></div>
+<figure><a class="figure-link" href="./static/images/dataset-negative-recovery.svg" target="_blank" rel="noopener" aria-label="Negative and recovery dataset examples"><img src="./static/images/dataset-negative-recovery.svg" alt="Negative sample showing suboptimal hesitation behind a leading vehicle, and recovery sample showing an aborted merge followed by correction to the nearest lane" loading="lazy" decoding="async" width="577" height="145"></a></figure>
+</div></section>
+<section id="nr-rft" class="section container">
+  <p class="eyebrow">Learning from experience</p><h2>Negative–Recovery Reinforcement Fine-Tuning</h2>
+  <div class="cards"><article><h3>Penalize negative behavior</h3><p>Penalize matching negative behavior.<br>Beyond the matching threshold,<br>no extra reward is given.</p></article><article><h3>Reward expert recovery</h3><p>Agreement with an expert correction earns a recovery reward, alongside the driving-quality reward.</p></article><article><h3>Correct difficult advantages</h3><p>Remove standard-deviation normalization.<br>Use a virtual reward for all-zero groups<br>to preserve learning signals.</p></article></div>
+<figure data-static><a class="figure-link" href="./static/images/spanvla-framework.png" target="_blank" rel="noopener" aria-label="Open full-size figure: SpanVLA framework combining supervised fine-tuning, negative-recovery reinforcement fine-tuning, and a flow-matching action bridge"><img src="./static/images/spanvla-framework.png" alt="SpanVLA framework combining supervised fine-tuning, negative-recovery reinforcement fine-tuning, and a flow-matching action bridge" loading="lazy" decoding="async" width="914" height="408"></a><figcaption><strong>SpanVLA framework.</strong> SFT aligns reasoning and planning; NR-RFT uses negative penalties, recovery rewards, and corrected group-relative advantages. At inference, the VLM delegates continuous trajectory generation to the action bridge.</figcaption></figure>
 </section>
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3"><em>mReasoning</em> Dataset</h2>
-      </div>
-    </div>
-  </div>
-  <p style="margin-top: 2.5rem;">
-    <em>mReasoning</em> includes 30k complex interaction scenarios, and 3k + 3k negative-recovery samples. The dataset is collected from real-world driving scenarios across Las Vegas, Boston, Pittsburgh, and Singapore.
-  </p>
-  <div class="container is-max-desktop">
-    <img src="./static/images/data_distribution.jpg" alt="Dataset Distribution" style="width: 100%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 0.6rem; margin-top: 2.0rem;">
-  </div>
-  <p>
-    Some complex scenario samples (positive samples) in the mReasoning dataset are shown below
-  </p>
-  <div class="container is-max-desktop">
-    <img src="./static/images/interaction_scenarios.jpg" alt="<em>mReasoning</em> Dataset Samples" style="width: 100%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem; margin-top: 2.0rem;">
-  </div>
-  <p>
-    <strong>(a) Cut-in scenario:</strong> A vehicle from the front-right abruptly cuts in at the intersection. Frame -3 and Frame 0 means the first history frame and the current frame for the camera streams.
-  </p>
-  <p style="margin-top: 0.5rem;">
-    <strong>(b) Intersection scenario:</strong> The ego vehicle has already entered the intersection; despite the red traffic signal, it should yield appropriately and follow the leading vehicle to complete the left turn.
-  </p>
+<section id="bridge" class="section tinted"><div class="container">
+  <p class="eyebrow">Efficient inference</p><h2>Efficient action bridging for fast action generation</h2>
+<figure data-static><a class="figure-link" href="./static/images/spanvla-bridge.png" target="_blank" rel="noopener" aria-label="Open full-size figure: Sparse VLM KV caches condition a cross-attention flow-matching action bridge initialized from historical motion"><img src="./static/images/spanvla-bridge.png" alt="Sparse VLM KV caches condition a cross-attention flow-matching action bridge initialized from historical motion" loading="lazy" decoding="async" width="806" height="186"></a></figure>
+  <div class="two-column"><article><h3>Sparse-layer KV conditioning</h3><p>Accessing selected VLM layers provides multi-granular context with less computation than dense layer-wise conditioning.</p></article><article><h3>Historical trajectory initialization</h3><p>Flow matching learns the transformation from past motion to future actions, using historical trajectory embeddings as its starting point.</p></article></div>
+</div></section>
+<section id="results" class="section container">
+  <p class="eyebrow">Experimental evidence</p><h2>Better avoidance. Stronger recovery.</h2>
+<div class="table-scroll" role="region" aria-label="nuReasoning-NR benchmark · 300 negative + 300 recovery scenarios" tabindex="0"><table><caption>nuReasoning-NR benchmark · 300 negative + 300 recovery scenarios</caption><thead><tr><th scope="col">Method / supervision</th><th scope="col">Negative ↑</th><th scope="col">Recovery ↑</th><th scope="col">Average PDMS ↑</th></tr></thead><tbody><tr class=""><th scope="row">LTF · positive only</th><td>62.7</td><td>51.0</td><td>56.8</td></tr><tr class=""><th scope="row">ReCogDrive · positive only</th><td>64.0</td><td>54.0</td><td>59.0</td></tr><tr class=""><th scope="row">AutoVLA · positive only</th><td>64.2</td><td>54.0</td><td>59.1</td></tr><tr class="baseline"><th scope="row">SpanVLA · positive only</th><td>65.1</td><td>56.1</td><td>60.6</td></tr><tr class=""><th scope="row">AutoVLA + NR</th><td>68.8</td><td>59.5</td><td>64.2</td></tr><tr class="ours"><th scope="row">SpanVLA + NR</th><td>74.1</td><td>65.1</td><td>69.6 <span class="score-gain">(+14.9%)</span></td></tr></tbody></table></div>
+  <h3 class="subsection-title" id="negative-results">Negative-Sample Results</h3>
+  <figure class="driving-demo"><img src="./static/images/negative_demo.gif" data-animated="./static/images/negative_demo.gif" data-still="./static/images/negative_demo-poster.png" alt="Original animated negative-sample demonstration comparing planning before and after reinforcement fine-tuning" loading="lazy" decoding="async" width="1471" height="1080"></figure>
+  <h3 class="subsection-title" id="recovery-results">Recovery-Sample Results</h3>
+  <figure class="driving-demo"><img src="./static/images/recovery_demo.gif" data-animated="./static/images/recovery_demo.gif" data-still="./static/images/recovery_demo-poster.png" alt="Original animated recovery-sample demonstration comparing planning before and after reinforcement fine-tuning" loading="lazy" decoding="async" width="1471" height="1080"></figure>
+<h3 class="subsection-title">Planning performance across benchmarks</h3>
+<div class="table-scroll" role="region" aria-label="NAVSIM results · navtest and navhard" tabindex="0"><table><caption>NAVSIM results · navtest and navhard</caption><thead><tr><th scope="col">Method</th><th scope="col">Sensors</th><th scope="col">NAVSIM v1<br>PDMS ↑</th><th scope="col">NAVSIM v2<br>EPDMS ↑</th><th scope="col">v2 navhard<br>EPDMS ↑</th></tr></thead><tbody><tr class=""><th scope="row">TransFuser</th><td>Camera + LiDAR</td><td>84.0</td><td>76.7</td><td>23.1</td></tr><tr class=""><th scope="row">Hydra-MDP</th><td>Camera + LiDAR</td><td>86.5</td><td>81.4</td><td>—</td></tr><tr class=""><th scope="row">DiffusionDrive</th><td>Camera + LiDAR</td><td>88.1</td><td>84.5</td><td>24.2</td></tr><tr class=""><th scope="row">AutoVLA</th><td>Camera</td><td>89.1</td><td>82.4</td><td>—</td></tr><tr class=""><th scope="row">ReCogDrive</th><td>Camera</td><td>89.6</td><td>83.6</td><td>—</td></tr><tr class=""><th scope="row">DriveVLA-W0</th><td>Camera</td><td>90.2</td><td>86.1</td><td>—</td></tr><tr class=""><th scope="row">Qwen-Drive</th><td>Camera</td><td>90.7</td><td>—</td><td>—</td></tr><tr class=""><th scope="row">RAP-DINO</th><td>—</td><td>—</td><td>—</td><td>36.9</td></tr><tr class="ours"><th scope="row">SpanVLA</th><td>Camera</td><td>90.8</td><td>86.9</td><td>40.8</td></tr><tr class="ours"><th scope="row">SpanVLA* · best-of-6</th><td>Camera</td><td>93.3</td><td>90.5</td><td>47.9</td></tr></tbody></table></div>
+  <h3 class="subsection-title">Fast action generation at higher trajectory resolution</h3>
+<div class="table-scroll" role="region" aria-label="Action generation efficiency · NAVSIM v1" tabindex="0"><table><caption>Action generation efficiency · NAVSIM v1</caption><thead><tr><th scope="col">Method</th><th scope="col">Waypoints</th><th scope="col">Trajectory generation ↓</th><th scope="col">Total latency ↓</th></tr></thead><tbody><tr class=""><th scope="row">AutoVLA · autoregressive</th><td>10</td><td>0.40 s</td><td>1.25 s</td></tr><tr class="ours"><th scope="row">SpanVLA · flow matching</th><td>10</td><td>0.08 s</td><td>0.67 s</td></tr><tr class=""><th scope="row">AutoVLA · autoregressive</th><td>50</td><td>1.72 s</td><td>2.57 s</td></tr><tr class="ours"><th scope="row">SpanVLA · flow matching</th><td>50</td><td>0.08 s</td><td>0.67 s</td></tr></tbody></table></div>
+  <p>For 50-waypoint trajectories, action generation takes <strong>0.08 s instead of 1.72 s (21.5× faster)</strong>. Reported total latency falls from <strong>2.57 s to 0.67 s (approximately 74% lower)</strong>. The bridge’s measured trajectory-generation time stays approximately unchanged from 10 to 50 waypoints.</p>
 </section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width has-text-centered">
-        <h2 class="title is-3">Experiments</h2>
-
-        <h3 class="title is-4" style="text-align: left;">Efficient Action Bridging</h3>
-        <div class="content has-text-justified">
-          <div class="container is-max-desktop has-text-centered">
-            <img src="./static/images/Efficiency_table.png" alt="Efficient Action Bridging" style="width: 85%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem;">
-          </div>
-          <p>
-            <ul style="list-style-type: disc; margin-left: 40px;margin-top: -1.5rem;">
-              <li>4x faster inference time compared to the autoregressive decoding. </li>
-              <li> As waypoint count increases in high-frequency trajectories, runtime grows only slightly. </li>
-            </ul>
-          </p>
-        </div>
-
-        <h3 class="title is-4" style="text-align: left; margin-bottom: 2rem; margin-top: 3rem;">RFT Performance</h3>
-        <div class="content has-text-justified">
-          <div class="container is-max-desktop">
-            <img src="./static/images/Positive_Results.jpg" alt="RFT Visualization" style="width: 98%; max-width: 100%; height: auto; max-height: 70vh; object-fit: contain; margin-bottom: 1.2rem;">
-          </div>
-          <p>
-            <ul style="list-style-type: disc; margin-left: 40px;margin-top: -1.5rem;">
-              <li>10% improvement in PDMS on the NAVSIM v1 benchmark with positive, negative, and recovery samples.</li>
-            </ul>
-          </p>
-        </div>
-
-        <h3 class="title is-4" style="text-align: left; margin-bottom: 2rem; margin-top:4rem;">Negative-Sample Results</h3>
-        <div class="content has-text-justified">
-          <div class="container is-max-desktop">
-            <div class="columns is-centered is-multiline">
-              <div class="column is-full has-text-centered" style="padding: 0.5rem;">
-                <img src="./static/images/negative_demo.gif" alt="Negative sample demo" style="width: 100%; height: auto;">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <h3 class="title is-4" style="text-align: left; margin-bottom: 2rem; margin-top:4rem;">Recovery-Sample Results</h3>
-        <div class="content has-text-justified">
-          <div class="container is-max-desktop">
-            <div class="columns is-centered is-multiline">
-              <div class="column is-full has-text-centered" style="padding: 0.5rem;">
-                <img src="./static/images/recovery_demo.gif" alt="Recovery sample demo" style="width: 100%; height: auto;">
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<section class="section" id="Acknowledgements">
-  <div class="container is-max-desktop content">
-    <h2 class="title is-3">Acknowledgements</h2>
-    <div class="content has-text-justified">
-      <p>
-        We would like to express our gratitude to Qian Zhu, Haram Kim, and Baoshu Qi for their extensive efforts in data preparation and annotation of the <em>mReasoning</em> dataset. Special thanks also go to Muhammad Taufik Tirtosudiro and Jiong Yang for their support in developing the evaluation pipeline. The authors also thank Nitin Kapania, Sourabh Vora, and Balajee Kannan for their strong support for the project.
-      </p>
-    </div>
-  </div>
-</section>
-
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{zhou2026spanvla,
-  author    = {Zhou, Zewei and Yang, Ruining and Qi, Xuewei and Guo, Yiluan and Chen, Sherry X. and Feng, Tao and Pistunova, Kateryna and Shen, Yishan and Su, Lili and Ma, Jiaqi},
-  title     = {SpanVLA: Efficient Action Bridging and Learning from Negative-Recovery Samples for Vision-Language-Action Model},
-  journal   = {arXiv preprint arXiv:2604.19710},
-  year      = {2026},
-}</code></pre>
-  </div>
-</section>
-
-
-
-<div class="content has-text-centered">
-  <p>
-    The website design was adapted from <a href="https://nerfies.github.io/">nerfies</a>.
-  </p>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var videos = document.querySelectorAll('.nuscene-video');
-    videos.forEach(function(video) {
-      video.playbackRate = 1.2;
-    });
-  });
-</script>
-
+<section id="BibTeX" class="section tinted"><div class="container">
+  <p class="eyebrow">Resources</p><h2>Citation</h2>
+  <div class="citation-header"><span>BibTeX · updated manuscript title</span><button class="copy-button" type="button" id="copy-citation">Copy BibTeX</button></div><pre><code id="citation">@article{zhou2026spanvla,
+  author  = {Zhou, Zewei and Yang, Ruining and Qi, Xuewei and Guo, Yiluan and Chen, Sherry X. and Feng, Tao and Pistunova, Kateryna and Shen, Yishan and Su, Lili and Ma, Jiaqi},
+  title   = {SpanVLA: Learning from Negative-Recovery Samples with Fast Action Bridging for Vision-Language-Action Model},
+  journal = {arXiv preprint arXiv:2604.19710},
+  year    = {2026}
+}</code></pre><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+</div></section>
+<section class="section container acknowledgements"><h2>Acknowledgements</h2><p>We thank Qian Zhu, Haram Kim, and Baoshu Qi for data preparation and annotation of nuReasoning-NR; Muhammad Taufik Tirtosudiro and Jiong Yang for support with the evaluation pipeline; and Nitin Kapania, Sourabh Vora, and Balajee Kannan for their support for the project. We also thank the Amazon AI PhD Fellowship and the Qualcomm Innovation Fellowship for their support.</p></section>
+</main>
+<footer><p>SpanVLA · UCLA · Motional · Northeastern University</p></footer>
 </body>
 </html>
